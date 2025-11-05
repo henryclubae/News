@@ -1,13 +1,12 @@
 /**
  * Service Worker Cache Implementation
- * 
  * Advanced service worker for offline support, background sync,
  * and strategic resource caching for news website
  */
 
 // ===== CACHE CONFIGURATION =====
-
 const CACHE_VERSION = 'news-v1.0.0';
+
 const CACHE_NAMES = {
   static: `${CACHE_VERSION}-static`,
   dynamic: `${CACHE_VERSION}-dynamic`,
@@ -22,7 +21,7 @@ const CACHE_STRATEGIES = {
   articles: 'stale-while-revalidate', // Article content
   images: 'cache-first',      // Images with fallback
   api: 'network-first',       // API calls with offline fallback
-} as const;
+};
 
 const CACHE_EXPIRATION = {
   static: 30 * 24 * 60 * 60 * 1000,    // 30 days
@@ -32,16 +31,16 @@ const CACHE_EXPIRATION = {
   api: 15 * 60 * 1000,                 // 15 minutes
 };
 
+// Static assets to cache on install
 const STATIC_ASSETS = [
   '/',
   '/manifest.json',
-  '/offline',
-  '/_next/static/css/',
-  '/_next/static/js/',
-  '/images/icons/',
-  '/fonts/',
+  '/favicon.ico',
+  '/offline.html',
+  '/_next/static/',
 ];
 
+// API endpoints configuration
 const API_ENDPOINTS = {
   articles: '/api/articles',
   search: '/api/search',
@@ -49,107 +48,78 @@ const API_ENDPOINTS = {
   authors: '/api/authors',
 };
 
-// ===== INTERFACES =====
-
-interface CachedResponse {
-  response: Response;
-  timestamp: number;
-  headers: Record<string, string>;
-  ttl?: number;
-}
-
-interface BackgroundSyncData {
-  id: string;
-  type: 'article-view' | 'search-query' | 'user-action';
-  data: unknown;
-  timestamp: number;
-  retryCount: number;
-}
-
-interface CacheAnalytics {
-  hits: number;
-  misses: number;
-  networkRequests: number;
-  offlineRequests: number;
-  lastUpdated: number;
-}
-
-// ===== SERVICE WORKER EVENT HANDLERS =====
-
-declare const self: ServiceWorkerGlobalScope;
-
-// Install Event - Cache static assets
-self.addEventListener('install', (event: ExtendableEvent) => {
-  console.log('[SW] Installing service worker...');
+// ===== INSTALL EVENT =====
+self.addEventListener('install', (event) => {
+  console.log('[SW] Service Worker installing...');
   
   event.waitUntil(
-    (async () => {
-      try {
-        // Cache static assets
-        const staticCache = await caches.open(CACHE_NAMES.static);
-        await staticCache.addAll(STATIC_ASSETS);
+    Promise.all([
+      caches.open(CACHE_NAMES.static).then(async (cache) => {
+        console.log('[SW] Caching static assets');
         
-        // Initialize other caches
-        await Promise.all([
-          caches.open(CACHE_NAMES.dynamic),
-          caches.open(CACHE_NAMES.articles),
-          caches.open(CACHE_NAMES.images),
-          caches.open(CACHE_NAMES.api),
-        ]);
+        // Cache static assets with error handling
+        const cachePromises = STATIC_ASSETS.map(async (url) => {
+          try {
+            const response = await fetch(url);
+            if (response.ok) {
+              await cache.put(url, response);
+              console.log(`[SW] Cached: ${url}`);
+            }
+          } catch (error) {
+            console.warn(`[SW] Failed to cache ${url}:`, error);
+          }
+        });
         
-        // Initialize analytics
-        await initializeAnalytics();
-        
-        console.log('[SW] Service worker installed successfully');
-        
-        // Skip waiting to activate immediately
-        await self.skipWaiting();
-      } catch (error) {
-        console.error('[SW] Installation failed:', error);
-      }
-    })()
+        await Promise.allSettled(cachePromises);
+      }),
+      
+      // Initialize analytics
+      initializeAnalytics(),
+      
+      // Cleanup old caches
+      cleanupOldCaches(),
+    ])
+  );
+
+  // Force immediate activation
+  self.skipWaiting();
+});
+
+// ===== ACTIVATE EVENT =====
+self.addEventListener('activate', (event) => {
+  console.log('[SW] Service Worker activating...');
+  
+  event.waitUntil(
+    Promise.all([
+      // Take control of all clients immediately
+      self.clients.claim(),
+      
+      // Cleanup old caches
+      cleanupOldCaches(),
+      
+      // Warm essential cache
+      warmEssentialCache(),
+    ])
   );
 });
 
-// Activate Event - Clean up old caches
-self.addEventListener('activate', (event: ExtendableEvent) => {
-  console.log('[SW] Activating service worker...');
-  
-  event.waitUntil(
-    (async () => {
-      try {
-        // Clean up old caches
-        await cleanupOldCaches();
-        
-        // Claim all clients
-        await self.clients.claim();
-        
-        // Warm cache with essential content
-        await warmEssentialCache();
-        
-        console.log('[SW] Service worker activated successfully');
-      } catch (error) {
-        console.error('[SW] Activation failed:', error);
-      }
-    })()
-  );
-});
-
-// Fetch Event - Handle all network requests
-self.addEventListener('fetch', (event: FetchEvent) => {
-  const { request } = event;
-  const url = new URL(request.url);
-  
-  // Skip non-GET requests and chrome-extension URLs
-  if (request.method !== 'GET' || url.protocol.startsWith('chrome-extension')) {
+// ===== FETCH EVENT =====
+self.addEventListener('fetch', (event) => {
+  // Only handle GET requests
+  if (event.request.method !== 'GET') {
     return;
   }
-  
-  event.respondWith(handleRequest(request));
+
+  // Skip chrome-extension and other non-http protocols
+  if (!event.request.url.startsWith('http')) {
+    return;
+  }
+
+  event.respondWith(handleRequest(event.request));
 });
 
-// Background Sync Event
-self.addEventListener('sync', (event: any) => {
+// ===== BACKGROUND SYNC =====
+self.addEventListener('sync', (event) => {
   console.log('[SW] Background sync triggered:', event.tag);
   
   if (event.tag === 'background-analytics') {
@@ -159,32 +129,38 @@ self.addEventListener('sync', (event: any) => {
   }
 });
 
-// Push Event - Handle push notifications
-self.addEventListener('push', (event: any) => {
+// ===== PUSH NOTIFICATION =====
+self.addEventListener('push', (event) => {
   console.log('[SW] Push notification received');
   
-  const data = event.data ? event.data.json() : {};
+  let data = {};
   
+  if (event.data) {
+    try {
+      data = event.data.json();
+    } catch (error) {
+      data = { title: event.data.text() };
+    }
+  }
+
   const options = {
-    body: data.body || 'New content available',
-    icon: '/images/icons/icon-192x192.png',
-    badge: '/images/icons/badge-72x72.png',
+    body: data.body || 'New content is available!',
+    icon: data.icon || '/icons/icon-192x192.png',
+    badge: data.badge || '/icons/badge-72x72.png',
+    image: data.image,
     data: data.url || '/',
-    tag: data.tag || 'news-update',
-    requireInteraction: data.priority === 'high',
     actions: [
       {
         action: 'view',
-        title: 'View Article',
-        icon: '/images/icons/view-icon.png',
-      },
-      {
-        action: 'dismiss',
-        title: 'Dismiss',
-      },
+        title: 'View',
+        icon: '/icons/view-icon.png'
+      }
     ],
+    tag: data.tag || 'news-update',
+    renotify: true,
+    requireInteraction: false,
   };
-  
+
   event.waitUntil(
     self.registration.showNotification(
       data.title || 'News Update',
@@ -194,11 +170,11 @@ self.addEventListener('push', (event: any) => {
 });
 
 // Notification Click Event
-self.addEventListener('notificationclick', (event: any) => {
+self.addEventListener('notificationclick', (event) => {
   console.log('[SW] Notification clicked');
   
   event.notification.close();
-  
+
   if (event.action === 'view') {
     event.waitUntil(
       self.clients.openWindow(event.notification.data)
@@ -207,8 +183,7 @@ self.addEventListener('notificationclick', (event: any) => {
 });
 
 // ===== REQUEST HANDLING =====
-
-async function handleRequest(request: Request): Promise<Response> {
+async function handleRequest(request) {
   const url = new URL(request.url);
   const pathname = url.pathname;
   
@@ -232,7 +207,7 @@ async function handleRequest(request: Request): Promise<Response> {
 }
 
 // Static Assets - Cache First Strategy
-async function handleStaticAsset(request: Request): Promise<Response> {
+async function handleStaticAsset(request) {
   const cache = await caches.open(CACHE_NAMES.static);
   
   // Try cache first
@@ -241,7 +216,7 @@ async function handleStaticAsset(request: Request): Promise<Response> {
     await updateAnalytics('hit');
     return cachedResponse;
   }
-  
+
   try {
     // Network fallback
     const networkResponse = await fetch(request);
@@ -252,13 +227,13 @@ async function handleStaticAsset(request: Request): Promise<Response> {
       await updateAnalytics('network');
       return networkResponse;
     }
-    
+
     // Return cached version even if expired
     if (cachedResponse) {
       await updateAnalytics('stale');
       return cachedResponse;
     }
-    
+
     throw new Error('Network response not ok');
   } catch (error) {
     await updateAnalytics('miss');
@@ -267,21 +242,26 @@ async function handleStaticAsset(request: Request): Promise<Response> {
     if (cachedResponse) {
       return cachedResponse;
     }
-    
+
     return await createOfflineResponse();
   }
 }
 
 // API Requests - Network First with Offline Support
-async function handleApiRequest(request: Request): Promise<Response> {
+async function handleApiRequest(request) {
   const cache = await caches.open(CACHE_NAMES.api);
   
   try {
     // Try network first
-    const networkResponse = await fetch(request, {
-      timeout: 5000, // 5 second timeout
-    } as RequestInit);
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
     
+    const networkResponse = await fetch(request, {
+      signal: controller.signal
+    });
+    
+    clearTimeout(timeoutId);
+
     if (networkResponse.ok) {
       // Cache successful responses
       const responseToCache = networkResponse.clone();
@@ -289,7 +269,7 @@ async function handleApiRequest(request: Request): Promise<Response> {
       await updateAnalytics('network');
       return networkResponse;
     }
-    
+
     throw new Error('Network response not ok');
   } catch (error) {
     // Fallback to cache
@@ -308,14 +288,14 @@ async function handleApiRequest(request: Request): Promise<Response> {
         headers,
       });
     }
-    
+
     await updateAnalytics('miss');
     return await createOfflineApiResponse(request);
   }
 }
 
 // Images - Cache First with Compression
-async function handleImageRequest(request: Request): Promise<Response> {
+async function handleImageRequest(request) {
   const cache = await caches.open(CACHE_NAMES.images);
   
   // Try cache first
@@ -324,7 +304,7 @@ async function handleImageRequest(request: Request): Promise<Response> {
     await updateAnalytics('hit');
     return cachedResponse;
   }
-  
+
   try {
     // Network with optimization
     const networkResponse = await fetch(request);
@@ -335,7 +315,7 @@ async function handleImageRequest(request: Request): Promise<Response> {
       await updateAnalytics('network');
       return networkResponse;
     }
-    
+
     throw new Error('Network response not ok');
   } catch (error) {
     await updateAnalytics('miss');
@@ -344,12 +324,12 @@ async function handleImageRequest(request: Request): Promise<Response> {
 }
 
 // Articles - Stale While Revalidate
-async function handleArticleRequest(request: Request): Promise<Response> {
+async function handleArticleRequest(request) {
   const cache = await caches.open(CACHE_NAMES.articles);
   
   // Get cached version
   const cachedResponse = await cache.match(request);
-  
+
   // Start network request (don't await)
   const networkPromise = fetch(request).then(async (networkResponse) => {
     if (networkResponse.ok) {
@@ -357,7 +337,7 @@ async function handleArticleRequest(request: Request): Promise<Response> {
     }
     return networkResponse;
   });
-  
+
   // Return cached version immediately if available and not too old
   if (cachedResponse && !isExpired(cachedResponse, CACHE_EXPIRATION.articles)) {
     await updateAnalytics('hit');
@@ -366,10 +346,10 @@ async function handleArticleRequest(request: Request): Promise<Response> {
     networkPromise.catch((error) => {
       console.warn('[SW] Background revalidation failed:', error);
     });
-    
+
     return cachedResponse;
   }
-  
+
   // Wait for network if no cache or cache is too old
   try {
     const networkResponse = await networkPromise;
@@ -381,14 +361,14 @@ async function handleArticleRequest(request: Request): Promise<Response> {
       await updateAnalytics('stale');
       return cachedResponse;
     }
-    
+
     await updateAnalytics('miss');
     return await createOfflineResponse();
   }
 }
 
 // Dynamic Content - Network First
-async function handleDynamicContent(request: Request): Promise<Response> {
+async function handleDynamicContent(request) {
   const cache = await caches.open(CACHE_NAMES.dynamic);
   
   try {
@@ -401,7 +381,7 @@ async function handleDynamicContent(request: Request): Promise<Response> {
       await updateAnalytics('network');
       return networkResponse;
     }
-    
+
     throw new Error('Network response not ok');
   } catch (error) {
     // Fallback to cache
@@ -411,15 +391,14 @@ async function handleDynamicContent(request: Request): Promise<Response> {
       await updateAnalytics('offline');
       return cachedResponse;
     }
-    
+
     await updateAnalytics('miss');
     return await createOfflineResponse();
   }
 }
 
 // ===== HELPER FUNCTIONS =====
-
-function isStaticAsset(pathname: string): boolean {
+function isStaticAsset(pathname) {
   return (
     pathname.startsWith('/_next/static/') ||
     pathname.startsWith('/fonts/') ||
@@ -431,11 +410,11 @@ function isStaticAsset(pathname: string): boolean {
   );
 }
 
-function isApiRequest(pathname: string): boolean {
+function isApiRequest(pathname) {
   return pathname.startsWith('/api/');
 }
 
-function isImageRequest(pathname: string): boolean {
+function isImageRequest(pathname) {
   return (
     pathname.startsWith('/images/') ||
     pathname.includes('.jpg') ||
@@ -447,7 +426,7 @@ function isImageRequest(pathname: string): boolean {
   );
 }
 
-function isArticleRequest(pathname: string): boolean {
+function isArticleRequest(pathname) {
   return (
     pathname.startsWith('/articles/') ||
     pathname.startsWith('/news/') ||
@@ -455,17 +434,16 @@ function isArticleRequest(pathname: string): boolean {
   );
 }
 
-function isExpired(response: Response, maxAge: number): boolean {
+function isExpired(response, maxAge) {
   const cacheDate = response.headers.get('sw-cache-date');
   if (!cacheDate) return true;
-  
+
   const cacheTime = parseInt(cacheDate);
   return Date.now() - cacheTime > maxAge;
 }
 
 // ===== OFFLINE RESPONSES =====
-
-async function createOfflineResponse(): Promise<Response> {
+async function createOfflineResponse() {
   const offlineHtml = `
     <!DOCTYPE html>
     <html lang="en">
@@ -527,7 +505,7 @@ async function createOfflineResponse(): Promise<Response> {
     </body>
     </html>
   `;
-  
+
   return new Response(offlineHtml, {
     status: 200,
     headers: {
@@ -537,12 +515,12 @@ async function createOfflineResponse(): Promise<Response> {
   });
 }
 
-async function createOfflineApiResponse(request: Request): Promise<Response> {
+async function createOfflineApiResponse(request) {
   const url = new URL(request.url);
   const pathname = url.pathname;
   
   let offlineData = {};
-  
+
   // Provide fallback data for specific endpoints
   if (pathname.includes('/articles')) {
     offlineData = {
@@ -565,7 +543,7 @@ async function createOfflineApiResponse(request: Request): Promise<Response> {
       offline: true,
     };
   }
-  
+
   return new Response(JSON.stringify(offlineData), {
     status: 200,
     headers: {
@@ -575,18 +553,18 @@ async function createOfflineApiResponse(request: Request): Promise<Response> {
   });
 }
 
-async function createOfflineImageResponse(): Promise<Response> {
+async function createOfflineImageResponse() {
   // Return a small placeholder SVG
   const placeholderSvg = `
     <svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
       <rect width="400" height="300" fill="#f3f4f6"/>
-      <text x="200" y="150" text-anchor="middle" dominant-baseline="middle" 
+      <text x="200" y="150" text-anchor="middle" dominant-baseline="middle"
             font-family="Arial, sans-serif" font-size="18" fill="#9ca3af">
         Image Offline
       </text>
     </svg>
   `;
-  
+
   return new Response(placeholderSvg, {
     status: 200,
     headers: {
@@ -597,22 +575,21 @@ async function createOfflineImageResponse(): Promise<Response> {
 }
 
 // ===== CACHE MANAGEMENT =====
-
-async function cleanupOldCaches(): Promise<void> {
+async function cleanupOldCaches() {
   const cacheNames = await caches.keys();
   
-  const oldCaches = cacheNames.filter(name => 
+  const oldCaches = cacheNames.filter(name =>
     name.startsWith('news-') && !Object.values(CACHE_NAMES).includes(name)
   );
-  
+
   await Promise.all(
     oldCaches.map(name => caches.delete(name))
   );
-  
+
   console.log(`[SW] Cleaned up ${oldCaches.length} old caches`);
 }
 
-async function warmEssentialCache(): Promise<void> {
+async function warmEssentialCache() {
   try {
     const essentialUrls = [
       '/',
@@ -620,7 +597,7 @@ async function warmEssentialCache(): Promise<void> {
       '/trending',
       '/api/articles?featured=true&limit=10',
     ];
-    
+
     const cache = await caches.open(CACHE_NAMES.dynamic);
     
     const promises = essentialUrls.map(async (url) => {
@@ -633,7 +610,7 @@ async function warmEssentialCache(): Promise<void> {
         console.warn(`[SW] Failed to warm cache for ${url}:`, error);
       }
     });
-    
+
     await Promise.allSettled(promises);
     console.log('[SW] Essential cache warmed');
   } catch (error) {
@@ -642,8 +619,7 @@ async function warmEssentialCache(): Promise<void> {
 }
 
 // ===== BACKGROUND SYNC =====
-
-async function syncAnalytics(): Promise<void> {
+async function syncAnalytics() {
   try {
     console.log('[SW] Syncing analytics data...');
     
@@ -659,7 +635,7 @@ async function syncAnalytics(): Promise<void> {
         },
         body: JSON.stringify(analytics),
       });
-      
+
       // Reset analytics
       await resetAnalytics();
       console.log('[SW] Analytics synced successfully');
@@ -669,14 +645,14 @@ async function syncAnalytics(): Promise<void> {
   }
 }
 
-async function syncContent(): Promise<void> {
+async function syncContent() {
   try {
     console.log('[SW] Syncing content updates...');
     
     // Check for content updates
     const response = await fetch('/api/content/updates');
     if (!response.ok) return;
-    
+
     const updates = await response.json();
     
     // Update caches with new content
@@ -694,7 +670,7 @@ async function syncContent(): Promise<void> {
         }
       }
     }
-    
+
     console.log('[SW] Content sync completed');
   } catch (error) {
     console.error('[SW] Content sync failed:', error);
@@ -702,20 +678,19 @@ async function syncContent(): Promise<void> {
 }
 
 // ===== ANALYTICS =====
-
-async function initializeAnalytics(): Promise<void> {
-  const analytics: CacheAnalytics = {
+async function initializeAnalytics() {
+  const analytics = {
     hits: 0,
     misses: 0,
     networkRequests: 0,
     offlineRequests: 0,
     lastUpdated: Date.now(),
   };
-  
+
   await storeAnalytics(analytics);
 }
 
-async function updateAnalytics(type: 'hit' | 'miss' | 'network' | 'offline' | 'stale'): Promise<void> {
+async function updateAnalytics(type) {
   try {
     const analytics = await getStoredAnalytics() || {
       hits: 0,
@@ -724,7 +699,7 @@ async function updateAnalytics(type: 'hit' | 'miss' | 'network' | 'offline' | 's
       offlineRequests: 0,
       lastUpdated: Date.now(),
     };
-    
+
     switch (type) {
       case 'hit':
       case 'stale':
@@ -740,12 +715,13 @@ async function updateAnalytics(type: 'hit' | 'miss' | 'network' | 'offline' | 's
         analytics.offlineRequests++;
         break;
     }
-    
+
     analytics.lastUpdated = Date.now();
     await storeAnalytics(analytics);
     
     // Schedule background sync if we have significant data
     const totalEvents = analytics.hits + analytics.misses + analytics.networkRequests + analytics.offlineRequests;
+    
     if (totalEvents % 50 === 0) { // Sync every 50 events
       if ('serviceWorker' in self && 'sync' in self.ServiceWorkerRegistration.prototype) {
         await self.registration.sync.register('background-analytics');
@@ -756,7 +732,7 @@ async function updateAnalytics(type: 'hit' | 'miss' | 'network' | 'offline' | 's
   }
 }
 
-async function storeAnalytics(analytics: CacheAnalytics): Promise<void> {
+async function storeAnalytics(analytics) {
   try {
     const cache = await caches.open(CACHE_NAMES.dynamic);
     const response = new Response(JSON.stringify(analytics), {
@@ -768,7 +744,7 @@ async function storeAnalytics(analytics: CacheAnalytics): Promise<void> {
   }
 }
 
-async function getStoredAnalytics(): Promise<CacheAnalytics | null> {
+async function getStoredAnalytics() {
   try {
     const cache = await caches.open(CACHE_NAMES.dynamic);
     const response = await cache.match('/sw-analytics');
@@ -776,7 +752,7 @@ async function getStoredAnalytics(): Promise<CacheAnalytics | null> {
     if (response) {
       return await response.json();
     }
-    
+
     return null;
   } catch (error) {
     console.error('[SW] Failed to get analytics:', error);
@@ -784,14 +760,13 @@ async function getStoredAnalytics(): Promise<CacheAnalytics | null> {
   }
 }
 
-async function resetAnalytics(): Promise<void> {
+async function resetAnalytics() {
   await initializeAnalytics();
 }
 
 // ===== MESSAGE HANDLING =====
-
-self.addEventListener('message', (event: ExtendableEvent) => {
-  const message = (event as any).data;
+self.addEventListener('message', (event) => {
+  const message = event.data;
   
   if (message.type === 'SKIP_WAITING') {
     self.skipWaiting();
@@ -804,7 +779,7 @@ self.addEventListener('message', (event: ExtendableEvent) => {
   }
 });
 
-async function handleCacheStatsRequest(event: ExtendableEvent): Promise<void> {
+async function handleCacheStatsRequest(event) {
   try {
     const analytics = await getStoredAnalytics();
     const cacheNames = await caches.keys();
@@ -815,7 +790,7 @@ async function handleCacheStatsRequest(event: ExtendableEvent): Promise<void> {
       cacheNames,
       version: CACHE_VERSION,
     };
-    
+
     // Send response to client
     const clients = await self.clients.matchAll();
     clients.forEach(client => {
@@ -829,10 +804,10 @@ async function handleCacheStatsRequest(event: ExtendableEvent): Promise<void> {
   }
 }
 
-async function handleClearCacheRequest(cacheType?: string): Promise<void> {
+async function handleClearCacheRequest(cacheType) {
   try {
-    if (cacheType && CACHE_NAMES[cacheType as keyof typeof CACHE_NAMES]) {
-      const cacheName = CACHE_NAMES[cacheType as keyof typeof CACHE_NAMES];
+    if (cacheType && CACHE_NAMES[cacheType]) {
+      const cacheName = CACHE_NAMES[cacheType];
       await caches.delete(cacheName);
       await caches.open(cacheName); // Recreate empty cache
       console.log(`[SW] Cleared cache: ${cacheName}`);
@@ -850,7 +825,7 @@ async function handleClearCacheRequest(cacheType?: string): Promise<void> {
   }
 }
 
-async function handlePreloadRequest(urls: string[]): Promise<void> {
+async function handlePreloadRequest(urls) {
   try {
     const cache = await caches.open(CACHE_NAMES.dynamic);
     
@@ -864,7 +839,7 @@ async function handlePreloadRequest(urls: string[]): Promise<void> {
         console.warn(`[SW] Failed to preload ${url}:`, error);
       }
     });
-    
+
     await Promise.allSettled(promises);
     console.log(`[SW] Preloaded ${urls.length} URLs`);
   } catch (error) {
@@ -872,4 +847,17 @@ async function handlePreloadRequest(urls: string[]): Promise<void> {
   }
 }
 
-console.log('[SW] Service worker script loaded');
+async function handleOfflineFallback(request) {
+  const url = new URL(request.url);
+  const pathname = url.pathname;
+  
+  if (isApiRequest(pathname)) {
+    return await createOfflineApiResponse(request);
+  } else if (isImageRequest(pathname)) {
+    return await createOfflineImageResponse();
+  } else {
+    return await createOfflineResponse();
+  }
+}
+
+console.log('[SW] Service worker loaded successfully');

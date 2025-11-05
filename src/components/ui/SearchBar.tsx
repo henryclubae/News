@@ -390,7 +390,7 @@ export function SearchBar({
             ${showCategories && categories.length > 0 ? 'pl-20' : ''}
           `}
           aria-label="Search"
-          aria-expanded={showDropdown}
+          aria-expanded={showDropdown ? "true" : "false"}
           aria-haspopup="listbox"
           aria-controls={showDropdown ? 'search-dropdown' : undefined}
           role="combobox"
