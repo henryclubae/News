@@ -1,32 +1,14 @@
 {
   "version": 2,
-  "name": "news-website",
-  "builds": [
+  "framework": "nextjs",
+  "rewrites": [
     {
-      "src": "package.json",
-      "use": "@vercel/next"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/sw.js",
-      "dest": "/public/sw.js",
-      "headers": {
-        "Service-Worker-Allowed": "/",
-        "Cache-Control": "no-cache"
-      }
+      "source": "/sw.js",
+      "destination": "/_next/static/sw.js"
     },
     {
-      "src": "/manifest.json",
-      "dest": "/api/manifest"
-    },
-    {
-      "src": "/api/(.*)",
-      "dest": "/api/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
+      "source": "/manifest.json",
+      "destination": "/api/manifest"
     }
   ],
   "headers": [
@@ -66,11 +48,7 @@
     "NODE_ENV": "production",
     "NEXT_PUBLIC_APP_NAME": "News Website"
   },
-  "functions": {
-    "app/api/**/*.js": {
-      "maxDuration": 10
-    }
-  },
+
   "regions": ["iad1"],
   "github": {
     "autoDeployments": true,
