@@ -1,0 +1,189 @@
+{
+  "common": {
+    "loading": "Cargando...",
+    "error": "Ha ocurrido un error",
+    "retry": "Intentar de nuevo",
+    "search": "Buscar",
+    "menu": "Menú",
+    "home": "Inicio",
+    "about": "Acerca de",
+    "contact": "Contacto",
+    "news": "Noticias",
+    "categories": "Categorías",
+    "readMore": "Leer más",
+    "share": "Compartir",
+    "back": "Volver",
+    "next": "Siguiente",
+    "previous": "Anterior",
+    "close": "Cerrar",
+    "submit": "Enviar",
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "confirm": "Confirmar"
+  },
+  "navigation": {
+    "mainMenu": "Menú Principal",
+    "skipToContent": "Saltar al contenido principal",
+    "toggleMenu": "Alternar menú de navegación",
+    "languageSelector": "Seleccionar Idioma",
+    "currentLanguage": "Idioma actual: {language}"
+  },
+  "header": {
+    "siteTitle": "Centro Global de Noticias",
+    "tagline": "Tu Fuente de Noticias Mundiales",
+    "searchPlaceholder": "Buscar noticias, temas o palabras clave...",
+    "searchButton": "Buscar Noticias",
+    "languageMenu": "Menú de Idiomas"
+  },
+  "footer": {
+    "copyright": "© {year} Centro Global de Noticias. Todos los derechos reservados.",
+    "privacyPolicy": "Política de Privacidad",
+    "termsOfService": "Términos de Servicio",
+    "aboutUs": "Acerca de Nosotros",
+    "contactUs": "Contáctanos",
+    "followUs": "Síguenos",
+    "newsletter": "Suscríbete al Boletín",
+    "newsletterPlaceholder": "Ingresa tu correo electrónico",
+    "subscribe": "Suscribirse"
+  },
+  "homepage": {
+    "title": "Últimas Noticias Mundiales",
+    "description": "Mantente informado con noticias de última hora y cobertura detallada de todo el mundo",
+    "featuredNews": "Noticias Destacadas",
+    "breakingNews": "Noticias de Última Hora",
+    "latestNews": "Últimas Noticias",
+    "trending": "Tendencias Ahora",
+    "categories": {
+      "politics": "Política",
+      "business": "Negocios",
+      "technology": "Tecnología",
+      "sports": "Deportes",
+      "entertainment": "Entretenimiento",
+      "health": "Salud",
+      "science": "Ciencia",
+      "world": "Noticias Mundiales"
+    }
+  },
+  "article": {
+    "publishedOn": "Publicado el {date}",
+    "updatedOn": "Actualizado el {date}",
+    "readTime": "{minutes} min de lectura",
+    "author": "Por {author}",
+    "tags": "Etiquetas",
+    "relatedArticles": "Artículos Relacionados",
+    "shareArticle": "Compartir Este Artículo",
+    "shareOn": "Compartir en {platform}",
+    "copyLink": "Copiar Enlace",
+    "linkCopied": "¡Enlace copiado al portapapeles!",
+    "comments": "Comentarios",
+    "noComments": "Aún no hay comentarios",
+    "writeComment": "Escribe un comentario...",
+    "postComment": "Publicar Comentario"
+  },
+  "search": {
+    "title": "Resultados de Búsqueda",
+    "placeholder": "¿Qué estás buscando?",
+    "resultsFor": "Resultados para \"{query}\"",
+    "noResults": "No se encontraron resultados para \"{query}\"",
+    "noResultsDescription": "Intenta ajustar tus términos de búsqueda o explora nuestras categorías",
+    "suggestions": "Sugerencias de Búsqueda",
+    "recentSearches": "Búsquedas Recientes",
+    "clearHistory": "Limpiar Historial de Búsqueda",
+    "searchHistory": "Historial de Búsqueda",
+    "filters": "Filtros",
+    "sortBy": "Ordenar Por",
+    "relevance": "Relevancia",
+    "date": "Fecha",
+    "popularity": "Popularidad"
+  },
+  "categories": {
+    "title": "Categorías de Noticias",
+    "description": "Navega las noticias por categoría para encontrar lo que más te interesa",
+    "allCategories": "Todas las Categorías",
+    "articlesInCategory": "{count} artículos en {category}",
+    "noArticles": "Aún no hay artículos en esta categoría"
+  },
+  "about": {
+    "title": "Acerca del Centro Global de Noticias",
+    "description": "Tu fuente confiable para cobertura integral de noticias mundiales",
+    "mission": "Nuestra Misión",
+    "missionText": "Proporcionar cobertura de noticias precisa, oportuna e imparcial de todo el mundo.",
+    "team": "Nuestro Equipo",
+    "contact": "Ponte en Contacto",
+    "history": "Nuestra Historia",
+    "values": "Nuestros Valores"
+  },
+  "contact": {
+    "title": "Contáctanos",
+    "description": "Ponte en contacto con nuestro equipo editorial",
+    "form": {
+      "name": "Nombre Completo",
+      "namePlaceholder": "Ingresa tu nombre completo",
+      "email": "Correo Electrónico",
+      "emailPlaceholder": "Ingresa tu correo electrónico",
+      "subject": "Asunto",
+      "subjectPlaceholder": "¿De qué se trata?",
+      "message": "Mensaje",
+      "messagePlaceholder": "Escribe tu mensaje aquí...",
+      "send": "Enviar Mensaje",
+      "sending": "Enviando...",
+      "success": "¡Gracias! Tu mensaje ha sido enviado.",
+      "error": "Lo sentimos, hubo un error al enviar tu mensaje."
+    },
+    "info": {
+      "address": "Dirección",
+      "phone": "Teléfono",
+      "email": "Correo Electrónico",
+      "hours": "Horario de Atención"
+    }
+  },
+  "errors": {
+    "404": {
+      "title": "Página No Encontrada",
+      "description": "La página que buscas no existe o ha sido movida.",
+      "backHome": "Volver al Inicio"
+    },
+    "500": {
+      "title": "Error del Servidor",
+      "description": "Algo salió mal de nuestro lado. Por favor intenta de nuevo más tarde.",
+      "refresh": "Actualizar Página"
+    },
+    "offline": {
+      "title": "Estás Sin Conexión",
+      "description": "Por favor verifica tu conexión a internet e intenta de nuevo.",
+      "retry": "Reintentar Conexión"
+    }
+  },
+  "accessibility": {
+    "skipToMain": "Saltar al contenido principal",
+    "openMenu": "Abrir menú de navegación",
+    "closeMenu": "Cerrar menú de navegación",
+    "searchExpanded": "El menú de búsqueda está expandido",
+    "searchCollapsed": "El menú de búsqueda está contraído",
+    "languageSwitcher": "Cambiador de idioma",
+    "shareMenu": "Menú de compartir",
+    "socialLinks": "Enlaces de redes sociales"
+  },
+  "time": {
+    "justNow": "Ahora mismo",
+    "minuteAgo": "Hace {count} minuto",
+    "minutesAgo": "Hace {count} minutos",
+    "hourAgo": "Hace {count} hora",
+    "hoursAgo": "Hace {count} horas",
+    "dayAgo": "Hace {count} día",
+    "daysAgo": "Hace {count} días",
+    "weekAgo": "Hace {count} semana",
+    "weeksAgo": "Hace {count} semanas",
+    "monthAgo": "Hace {count} mes",
+    "monthsAgo": "Hace {count} meses",
+    "yearAgo": "Hace {count} año",
+    "yearsAgo": "Hace {count} años"
+  },
+  "seo": {
+    "defaultTitle": "Centro Global de Noticias - Cobertura de Noticias Mundiales",
+    "defaultDescription": "Mantente informado con noticias de última hora, análisis detallado y cobertura integral de todo el mundo. Tu fuente confiable para noticias mundiales.",
+    "keywords": "noticias, noticias mundiales, noticias de última hora, eventos actuales, política, negocios, tecnología, deportes"
+  }
+}

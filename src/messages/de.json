@@ -1,0 +1,189 @@
+{
+  "common": {
+    "loading": "Wird geladen...",
+    "error": "Ein Fehler ist aufgetreten",
+    "retry": "Erneut versuchen",
+    "search": "Suchen",
+    "menu": "Menü",
+    "home": "Startseite",
+    "about": "Über uns",
+    "contact": "Kontakt",
+    "news": "Nachrichten",
+    "categories": "Kategorien",
+    "readMore": "Weiterlesen",
+    "share": "Teilen",
+    "back": "Zurück",
+    "next": "Weiter",
+    "previous": "Vorherige",
+    "close": "Schließen",
+    "submit": "Senden",
+    "cancel": "Abbrechen",
+    "save": "Speichern",
+    "edit": "Bearbeiten",
+    "delete": "Löschen",
+    "confirm": "Bestätigen"
+  },
+  "navigation": {
+    "mainMenu": "Hauptmenü",
+    "skipToContent": "Zum Hauptinhalt springen",
+    "toggleMenu": "Navigationsmenü umschalten",
+    "languageSelector": "Sprache auswählen",
+    "currentLanguage": "Aktuelle Sprache: {language}"
+  },
+  "header": {
+    "siteTitle": "Globales Nachrichtenzentrum",
+    "tagline": "Ihre Quelle für Weltnachrichten",
+    "searchPlaceholder": "Nachrichten, Themen oder Schlüsselwörter suchen...",
+    "searchButton": "Nachrichten suchen",
+    "languageMenu": "Sprachmenü"
+  },
+  "footer": {
+    "copyright": "© {year} Globales Nachrichtenzentrum. Alle Rechte vorbehalten.",
+    "privacyPolicy": "Datenschutzrichtlinie",
+    "termsOfService": "Nutzungsbedingungen",
+    "aboutUs": "Über uns",
+    "contactUs": "Kontaktieren Sie uns",
+    "followUs": "Folgen Sie uns",
+    "newsletter": "Newsletter abonnieren",
+    "newsletterPlaceholder": "E-Mail eingeben",
+    "subscribe": "Abonnieren"
+  },
+  "homepage": {
+    "title": "Neueste Weltnachrichten",
+    "description": "Bleiben Sie auf dem Laufenden mit aktuellen Nachrichten und tiefgreifender Berichterstattung aus der ganzen Welt",
+    "featuredNews": "Hauptnachrichten",
+    "breakingNews": "Eilmeldungen",
+    "latestNews": "Neueste Nachrichten",
+    "trending": "Trending jetzt",
+    "categories": {
+      "politics": "Politik",
+      "business": "Wirtschaft",
+      "technology": "Technologie",
+      "sports": "Sport",
+      "entertainment": "Unterhaltung",
+      "health": "Gesundheit",
+      "science": "Wissenschaft",
+      "world": "Weltnachrichten"
+    }
+  },
+  "article": {
+    "publishedOn": "Veröffentlicht am {date}",
+    "updatedOn": "Aktualisiert am {date}",
+    "readTime": "{minutes} Min. Lesezeit",
+    "author": "Von {author}",
+    "tags": "Tags",
+    "relatedArticles": "Verwandte Artikel",
+    "shareArticle": "Diesen Artikel teilen",
+    "shareOn": "Teilen auf {platform}",
+    "copyLink": "Link kopieren",
+    "linkCopied": "Link in die Zwischenablage kopiert!",
+    "comments": "Kommentare",
+    "noComments": "Noch keine Kommentare",
+    "writeComment": "Einen Kommentar schreiben...",
+    "postComment": "Kommentar veröffentlichen"
+  },
+  "search": {
+    "title": "Suchergebnisse",
+    "placeholder": "Wonach suchen Sie?",
+    "resultsFor": "Ergebnisse für \"{query}\"",
+    "noResults": "Keine Ergebnisse für \"{query}\" gefunden",
+    "noResultsDescription": "Versuchen Sie, Ihre Suchbegriffe anzupassen oder durchstöbern Sie unsere Kategorien",
+    "suggestions": "Suchvorschläge",
+    "recentSearches": "Letzte Suchen",
+    "clearHistory": "Suchverlauf löschen",
+    "searchHistory": "Suchverlauf",
+    "filters": "Filter",
+    "sortBy": "Sortieren nach",
+    "relevance": "Relevanz",
+    "date": "Datum",
+    "popularity": "Beliebtheit"
+  },
+  "categories": {
+    "title": "Nachrichtenkategorien",
+    "description": "Durchstöbern Sie Nachrichten nach Kategorien, um zu finden, was Sie am meisten interessiert",
+    "allCategories": "Alle Kategorien",
+    "articlesInCategory": "{count} Artikel in {category}",
+    "noArticles": "Noch keine Artikel in dieser Kategorie"
+  },
+  "about": {
+    "title": "Über das Globale Nachrichtenzentrum",
+    "description": "Ihre vertrauenswürdige Quelle für umfassende Weltberichterstattung",
+    "mission": "Unsere Mission",
+    "missionText": "Genaue, zeitnahe und unparteiische Nachrichtenberichterstattung aus der ganzen Welt bereitzustellen.",
+    "team": "Unser Team",
+    "contact": "Kontaktieren Sie uns",
+    "history": "Unsere Geschichte",
+    "values": "Unsere Werte"
+  },
+  "contact": {
+    "title": "Kontaktieren Sie uns",
+    "description": "Nehmen Sie Kontakt mit unserem Redaktionsteam auf",
+    "form": {
+      "name": "Vollständiger Name",
+      "namePlaceholder": "Geben Sie Ihren vollständigen Namen ein",
+      "email": "E-Mail-Adresse",
+      "emailPlaceholder": "Geben Sie Ihre E-Mail-Adresse ein",
+      "subject": "Betreff",
+      "subjectPlaceholder": "Worum geht es?",
+      "message": "Nachricht",
+      "messagePlaceholder": "Schreiben Sie Ihre Nachricht hier...",
+      "send": "Nachricht senden",
+      "sending": "Wird gesendet...",
+      "success": "Vielen Dank! Ihre Nachricht wurde gesendet.",
+      "error": "Entschuldigung, beim Senden Ihrer Nachricht ist ein Fehler aufgetreten."
+    },
+    "info": {
+      "address": "Adresse",
+      "phone": "Telefon",
+      "email": "E-Mail",
+      "hours": "Geschäftszeiten"
+    }
+  },
+  "errors": {
+    "404": {
+      "title": "Seite nicht gefunden",
+      "description": "Die Seite, die Sie suchen, existiert nicht oder wurde verschoben.",
+      "backHome": "Zurück zur Startseite"
+    },
+    "500": {
+      "title": "Serverfehler",
+      "description": "Etwas ist auf unserer Seite schiefgelaufen. Bitte versuchen Sie es später erneut.",
+      "refresh": "Seite aktualisieren"
+    },
+    "offline": {
+      "title": "Sie sind offline",
+      "description": "Bitte überprüfen Sie Ihre Internetverbindung und versuchen Sie es erneut.",
+      "retry": "Verbindung wiederholen"
+    }
+  },
+  "accessibility": {
+    "skipToMain": "Zum Hauptinhalt springen",
+    "openMenu": "Navigationsmenü öffnen",
+    "closeMenu": "Navigationsmenü schließen",
+    "searchExpanded": "Suchmenü ist erweitert",
+    "searchCollapsed": "Suchmenü ist eingeklappt",
+    "languageSwitcher": "Sprachumschalter",
+    "shareMenu": "Teilen-Menü",
+    "socialLinks": "Social-Media-Links"
+  },
+  "time": {
+    "justNow": "Gerade eben",
+    "minuteAgo": "vor {count} Minute",
+    "minutesAgo": "vor {count} Minuten",
+    "hourAgo": "vor {count} Stunde",
+    "hoursAgo": "vor {count} Stunden",
+    "dayAgo": "vor {count} Tag",
+    "daysAgo": "vor {count} Tagen",
+    "weekAgo": "vor {count} Woche",
+    "weeksAgo": "vor {count} Wochen",
+    "monthAgo": "vor {count} Monat",
+    "monthsAgo": "vor {count} Monaten",
+    "yearAgo": "vor {count} Jahr",
+    "yearsAgo": "vor {count} Jahren"
+  },
+  "seo": {
+    "defaultTitle": "Globales Nachrichtenzentrum - Weltweite Nachrichtenberichterstattung",
+    "defaultDescription": "Bleiben Sie informiert mit aktuellen Nachrichten, tiefgreifenden Analysen und umfassender Berichterstattung aus der ganzen Welt. Ihre vertrauenswürdige Quelle für Weltnachrichten.",
+    "keywords": "nachrichten, weltnachrichten, aktuelle nachrichten, aktuelle ereignisse, politik, wirtschaft, technologie, sport"
+  }
+}

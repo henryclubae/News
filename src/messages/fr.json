@@ -1,0 +1,189 @@
+{
+  "common": {
+    "loading": "Chargement...",
+    "error": "Une erreur s'est produite",
+    "retry": "Réessayer",
+    "search": "Rechercher",
+    "menu": "Menu",
+    "home": "Accueil",
+    "about": "À propos",
+    "contact": "Contact",
+    "news": "Actualités",
+    "categories": "Catégories",
+    "readMore": "Lire la suite",
+    "share": "Partager",
+    "back": "Retour",
+    "next": "Suivant",
+    "previous": "Précédent",
+    "close": "Fermer",
+    "submit": "Soumettre",
+    "cancel": "Annuler",
+    "save": "Sauvegarder",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "confirm": "Confirmer"
+  },
+  "navigation": {
+    "mainMenu": "Menu Principal",
+    "skipToContent": "Aller au contenu principal",
+    "toggleMenu": "Basculer le menu de navigation",
+    "languageSelector": "Sélectionner la Langue",
+    "currentLanguage": "Langue actuelle : {language}"
+  },
+  "header": {
+    "siteTitle": "Centre d'Actualités Global",
+    "tagline": "Votre Source d'Actualités Mondiales",
+    "searchPlaceholder": "Rechercher des actualités, sujets ou mots-clés...",
+    "searchButton": "Rechercher des Actualités",
+    "languageMenu": "Menu des Langues"
+  },
+  "footer": {
+    "copyright": "© {year} Centre d'Actualités Global. Tous droits réservés.",
+    "privacyPolicy": "Politique de Confidentialité",
+    "termsOfService": "Conditions d'Utilisation",
+    "aboutUs": "À Propos de Nous",
+    "contactUs": "Nous Contacter",
+    "followUs": "Suivez-Nous",
+    "newsletter": "S'abonner à la Newsletter",
+    "newsletterPlaceholder": "Entrez votre email",
+    "subscribe": "S'abonner"
+  },
+  "homepage": {
+    "title": "Dernières Actualités Mondiales",
+    "description": "Restez informé avec les dernières nouvelles et une couverture approfondie du monde entier",
+    "featuredNews": "Actualités en Vedette",
+    "breakingNews": "Dernières Nouvelles",
+    "latestNews": "Actualités Récentes",
+    "trending": "Tendances Actuelles",
+    "categories": {
+      "politics": "Politique",
+      "business": "Business",
+      "technology": "Technologie",
+      "sports": "Sports",
+      "entertainment": "Divertissement",
+      "health": "Santé",
+      "science": "Science",
+      "world": "Actualités Mondiales"
+    }
+  },
+  "article": {
+    "publishedOn": "Publié le {date}",
+    "updatedOn": "Mis à jour le {date}",
+    "readTime": "{minutes} min de lecture",
+    "author": "Par {author}",
+    "tags": "Tags",
+    "relatedArticles": "Articles Connexes",
+    "shareArticle": "Partager Cet Article",
+    "shareOn": "Partager sur {platform}",
+    "copyLink": "Copier le Lien",
+    "linkCopied": "Lien copié dans le presse-papiers !",
+    "comments": "Commentaires",
+    "noComments": "Pas encore de commentaires",
+    "writeComment": "Écrire un commentaire...",
+    "postComment": "Publier le Commentaire"
+  },
+  "search": {
+    "title": "Résultats de Recherche",
+    "placeholder": "Que recherchez-vous ?",
+    "resultsFor": "Résultats pour \"{query}\"",
+    "noResults": "Aucun résultat trouvé pour \"{query}\"",
+    "noResultsDescription": "Essayez d'ajuster vos termes de recherche ou parcourez nos catégories",
+    "suggestions": "Suggestions de Recherche",
+    "recentSearches": "Recherches Récentes",
+    "clearHistory": "Effacer l'Historique de Recherche",
+    "searchHistory": "Historique de Recherche",
+    "filters": "Filtres",
+    "sortBy": "Trier Par",
+    "relevance": "Pertinence",
+    "date": "Date",
+    "popularity": "Popularité"
+  },
+  "categories": {
+    "title": "Catégories d'Actualités",
+    "description": "Parcourez les actualités par catégorie pour trouver ce qui vous intéresse le plus",
+    "allCategories": "Toutes les Catégories",
+    "articlesInCategory": "{count} articles dans {category}",
+    "noArticles": "Pas encore d'articles dans cette catégorie"
+  },
+  "about": {
+    "title": "À Propos du Centre d'Actualités Global",
+    "description": "Votre source fiable pour une couverture complète des actualités mondiales",
+    "mission": "Notre Mission",
+    "missionText": "Fournir une couverture d'actualités précise, opportune et impartiale du monde entier.",
+    "team": "Notre Équipe",
+    "contact": "Nous Contacter",
+    "history": "Notre Histoire",
+    "values": "Nos Valeurs"
+  },
+  "contact": {
+    "title": "Nous Contacter",
+    "description": "Entrez en contact avec notre équipe éditoriale",
+    "form": {
+      "name": "Nom Complet",
+      "namePlaceholder": "Entrez votre nom complet",
+      "email": "Adresse Email",
+      "emailPlaceholder": "Entrez votre adresse email",
+      "subject": "Sujet",
+      "subjectPlaceholder": "De quoi s'agit-il ?",
+      "message": "Message",
+      "messagePlaceholder": "Écrivez votre message ici...",
+      "send": "Envoyer le Message",
+      "sending": "Envoi en cours...",
+      "success": "Merci ! Votre message a été envoyé.",
+      "error": "Désolé, il y a eu une erreur lors de l'envoi de votre message."
+    },
+    "info": {
+      "address": "Adresse",
+      "phone": "Téléphone",
+      "email": "Email",
+      "hours": "Heures d'Ouverture"
+    }
+  },
+  "errors": {
+    "404": {
+      "title": "Page Non Trouvée",
+      "description": "La page que vous recherchez n'existe pas ou a été déplacée.",
+      "backHome": "Retour à l'Accueil"
+    },
+    "500": {
+      "title": "Erreur Serveur",
+      "description": "Quelque chose a mal fonctionné de notre côté. Veuillez réessayer plus tard.",
+      "refresh": "Actualiser la Page"
+    },
+    "offline": {
+      "title": "Vous êtes Hors Ligne",
+      "description": "Veuillez vérifier votre connexion internet et réessayer.",
+      "retry": "Réessayer la Connexion"
+    }
+  },
+  "accessibility": {
+    "skipToMain": "Aller au contenu principal",
+    "openMenu": "Ouvrir le menu de navigation",
+    "closeMenu": "Fermer le menu de navigation",
+    "searchExpanded": "Le menu de recherche est étendu",
+    "searchCollapsed": "Le menu de recherche est réduit",
+    "languageSwitcher": "Sélecteur de langue",
+    "shareMenu": "Menu de partage",
+    "socialLinks": "Liens des réseaux sociaux"
+  },
+  "time": {
+    "justNow": "À l'instant",
+    "minuteAgo": "Il y a {count} minute",
+    "minutesAgo": "Il y a {count} minutes",
+    "hourAgo": "Il y a {count} heure",
+    "hoursAgo": "Il y a {count} heures",
+    "dayAgo": "Il y a {count} jour",
+    "daysAgo": "Il y a {count} jours",
+    "weekAgo": "Il y a {count} semaine",
+    "weeksAgo": "Il y a {count} semaines",
+    "monthAgo": "Il y a {count} mois",
+    "monthsAgo": "Il y a {count} mois",
+    "yearAgo": "Il y a {count} an",
+    "yearsAgo": "Il y a {count} ans"
+  },
+  "seo": {
+    "defaultTitle": "Centre d'Actualités Global - Couverture des Actualités Mondiales",
+    "defaultDescription": "Restez informé avec les dernières nouvelles, analyses approfondies et couverture complète du monde entier. Votre source fiable pour les actualités mondiales.",
+    "keywords": "actualités, actualités mondiales, dernières nouvelles, événements actuels, politique, business, technologie, sports"
+  }
+}

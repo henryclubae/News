@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@formatjs/intl-localematcher": "^0.6.2",
     "@headlessui/react": "^2.2.9",
     "@heroicons/react": "^2.2.0",
     "@hookform/resolvers": "^5.2.2",
@@ -19,6 +20,7 @@
     "ioredis": "^5.8.2",
     "js-cookie": "^3.0.5",
     "lucide-react": "^0.552.0",
+    "negotiator": "^1.0.0",
     "next": "16.0.1",
     "next-intl": "^4.4.0",
     "next-sitemap": "^4.2.3",
@@ -36,6 +38,7 @@
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/js-cookie": "^3.0.6",
+    "@types/negotiator": "^0.6.4",
     "@types/node": "^20.19.24",
     "@types/react": "^19",
     "@types/react-dom": "^19",

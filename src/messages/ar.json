@@ -1,0 +1,189 @@
+{
+  "common": {
+    "loading": "جارٍ التحميل...",
+    "error": "حدث خطأ",
+    "retry": "حاول مرة أخرى",
+    "search": "بحث",
+    "menu": "القائمة",
+    "home": "الرئيسية",
+    "about": "حول",
+    "contact": "اتصل بنا",
+    "news": "الأخبار",
+    "categories": "التصنيفات",
+    "readMore": "اقرأ المزيد",
+    "share": "مشاركة",
+    "back": "رجوع",
+    "next": "التالي",
+    "previous": "السابق",
+    "close": "إغلاق",
+    "submit": "إرسال",
+    "cancel": "إلغاء",
+    "save": "حفظ",
+    "edit": "تعديل",
+    "delete": "حذف",
+    "confirm": "تأكيد"
+  },
+  "navigation": {
+    "mainMenu": "القائمة الرئيسية",
+    "skipToContent": "الانتقال إلى المحتوى الرئيسي",
+    "toggleMenu": "تبديل قائمة التنقل",
+    "languageSelector": "اختيار اللغة",
+    "currentLanguage": "اللغة الحالية: {language}"
+  },
+  "header": {
+    "siteTitle": "مركز الأخبار العالمي",
+    "tagline": "مصدرك للأخبار العالمية",
+    "searchPlaceholder": "ابحث عن الأخبار أو المواضيع أو الكلمات الرئيسية...",
+    "searchButton": "البحث في الأخبار",
+    "languageMenu": "قائمة اللغات"
+  },
+  "footer": {
+    "copyright": "© {year} مركز الأخبار العالمي. جميع الحقوق محفوظة.",
+    "privacyPolicy": "سياسة الخصوصية",
+    "termsOfService": "شروط الخدمة",
+    "aboutUs": "من نحن",
+    "contactUs": "اتصل بنا",
+    "followUs": "تابعنا",
+    "newsletter": "اشترك في النشرة الإخبارية",
+    "newsletterPlaceholder": "أدخل بريدك الإلكتروني",
+    "subscribe": "اشتراك"
+  },
+  "homepage": {
+    "title": "آخر الأخبار العالمية",
+    "description": "ابق على اطلاع بأحدث الأخبار والتغطية المتعمقة من جميع أنحاء العالم",
+    "featuredNews": "الأخبار المميزة",
+    "breakingNews": "أخبار عاجلة",
+    "latestNews": "آخر الأخبار",
+    "trending": "الأكثر رواجاً الآن",
+    "categories": {
+      "politics": "السياسة",
+      "business": "الأعمال",
+      "technology": "التكنولوجيا",
+      "sports": "الرياضة",
+      "entertainment": "الترفيه",
+      "health": "الصحة",
+      "science": "العلوم",
+      "world": "الأخبار العالمية"
+    }
+  },
+  "article": {
+    "publishedOn": "نُشر في {date}",
+    "updatedOn": "محدث في {date}",
+    "readTime": "{minutes} دقيقة قراءة",
+    "author": "بواسطة {author}",
+    "tags": "الوسوم",
+    "relatedArticles": "مقالات ذات صلة",
+    "shareArticle": "شارك هذا المقال",
+    "shareOn": "شارك على {platform}",
+    "copyLink": "نسخ الرابط",
+    "linkCopied": "تم نسخ الرابط إلى الحافظة!",
+    "comments": "التعليقات",
+    "noComments": "لا توجد تعليقات بعد",
+    "writeComment": "اكتب تعليقاً...",
+    "postComment": "نشر التعليق"
+  },
+  "search": {
+    "title": "نتائج البحث",
+    "placeholder": "عما تبحث؟",
+    "resultsFor": "نتائج البحث عن \"{query}\"",
+    "noResults": "لم يتم العثور على نتائج لـ \"{query}\"",
+    "noResultsDescription": "جرب تعديل مصطلحات البحث أو تصفح تصنيفاتنا",
+    "suggestions": "اقتراحات البحث",
+    "recentSearches": "عمليات البحث الأخيرة",
+    "clearHistory": "مسح تاريخ البحث",
+    "searchHistory": "تاريخ البحث",
+    "filters": "المرشحات",
+    "sortBy": "ترتيب حسب",
+    "relevance": "الصلة",
+    "date": "التاريخ",
+    "popularity": "الشعبية"
+  },
+  "categories": {
+    "title": "تصنيفات الأخبار",
+    "description": "تصفح الأخبار حسب التصنيف للعثور على ما يهمك أكثر",
+    "allCategories": "جميع التصنيفات",
+    "articlesInCategory": "{count} مقال في {category}",
+    "noArticles": "لا توجد مقالات في هذا التصنيف بعد"
+  },
+  "about": {
+    "title": "حول مركز الأخبار العالمي",
+    "description": "مصدرك الموثوق للتغطية الشاملة للأخبار العالمية",
+    "mission": "مهمتنا",
+    "missionText": "توفير تغطية إخبارية دقيقة وفي الوقت المناسب ومحايدة من جميع أنحاء العالم.",
+    "team": "فريقنا",
+    "contact": "تواصل معنا",
+    "history": "تاريخنا",
+    "values": "قيمنا"
+  },
+  "contact": {
+    "title": "اتصل بنا",
+    "description": "تواصل مع فريق التحرير لدينا",
+    "form": {
+      "name": "الاسم الكامل",
+      "namePlaceholder": "أدخل اسمك الكامل",
+      "email": "البريد الإلكتروني",
+      "emailPlaceholder": "أدخل بريدك الإلكتروني",
+      "subject": "الموضوع",
+      "subjectPlaceholder": "ما هو موضوع رسالتك؟",
+      "message": "الرسالة",
+      "messagePlaceholder": "اكتب رسالتك هنا...",
+      "send": "إرسال الرسالة",
+      "sending": "جارٍ الإرسال...",
+      "success": "شكراً لك! تم إرسال رسالتك.",
+      "error": "عذراً، حدث خطأ أثناء إرسال رسالتك."
+    },
+    "info": {
+      "address": "العنوان",
+      "phone": "الهاتف",
+      "email": "البريد الإلكتروني",
+      "hours": "ساعات العمل"
+    }
+  },
+  "errors": {
+    "404": {
+      "title": "الصفحة غير موجودة",
+      "description": "الصفحة التي تبحث عنها غير موجودة أو تم نقلها.",
+      "backHome": "العودة للرئيسية"
+    },
+    "500": {
+      "title": "خطأ في الخادم",
+      "description": "حدث خطأ من جانبنا. يرجى المحاولة مرة أخرى لاحقاً.",
+      "refresh": "تحديث الصفحة"
+    },
+    "offline": {
+      "title": "أنت غير متصل بالإنترنت",
+      "description": "يرجى التحقق من اتصالك بالإنترنت والمحاولة مرة أخرى.",
+      "retry": "إعادة المحاولة"
+    }
+  },
+  "accessibility": {
+    "skipToMain": "الانتقال إلى المحتوى الرئيسي",
+    "openMenu": "فتح قائمة التنقل",
+    "closeMenu": "إغلاق قائمة التنقل",
+    "searchExpanded": "قائمة البحث مفتوحة",
+    "searchCollapsed": "قائمة البحث مطوية",
+    "languageSwitcher": "مبدل اللغة",
+    "shareMenu": "قائمة المشاركة",
+    "socialLinks": "روابط وسائل التواصل الاجتماعي"
+  },
+  "time": {
+    "justNow": "الآن",
+    "minuteAgo": "منذ {count} دقيقة",
+    "minutesAgo": "منذ {count} دقائق",
+    "hourAgo": "منذ {count} ساعة",
+    "hoursAgo": "منذ {count} ساعات",
+    "dayAgo": "منذ {count} يوم",
+    "daysAgo": "منذ {count} أيام",
+    "weekAgo": "منذ {count} أسبوع",
+    "weeksAgo": "منذ {count} أسابيع",
+    "monthAgo": "منذ {count} شهر",
+    "monthsAgo": "منذ {count} أشهر",
+    "yearAgo": "منذ {count} سنة",
+    "yearsAgo": "منذ {count} سنوات"
+  },
+  "seo": {
+    "defaultTitle": "مركز الأخبار العالمي - تغطية الأخبار العالمية",
+    "defaultDescription": "ابق على اطلاع بأحدث الأخبار والتحليلات المتعمقة والتغطية الشاملة من جميع أنحاء العالم. مصدرك الموثوق للأخبار العالمية.",
+    "keywords": "أخبار, أخبار عالمية, أخبار عاجلة, الأحداث الجارية, السياسة, الأعمال, التكنولوجيا, الرياضة"
+  }
+}

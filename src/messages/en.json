@@ -1,0 +1,189 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "retry": "Try Again",
+    "search": "Search",
+    "menu": "Menu",
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact",
+    "news": "News",
+    "categories": "Categories",
+    "readMore": "Read More",
+    "share": "Share",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "close": "Close",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "confirm": "Confirm"
+  },
+  "navigation": {
+    "mainMenu": "Main Menu",
+    "skipToContent": "Skip to main content",
+    "toggleMenu": "Toggle navigation menu",
+    "languageSelector": "Select Language",
+    "currentLanguage": "Current language: {language}"
+  },
+  "header": {
+    "siteTitle": "Global News Hub",
+    "tagline": "Your Source for World News",
+    "searchPlaceholder": "Search news, topics, or keywords...",
+    "searchButton": "Search News",
+    "languageMenu": "Language Menu"
+  },
+  "footer": {
+    "copyright": "© {year} Global News Hub. All rights reserved.",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service",
+    "aboutUs": "About Us",
+    "contactUs": "Contact Us",
+    "followUs": "Follow Us",
+    "newsletter": "Subscribe to Newsletter",
+    "newsletterPlaceholder": "Enter your email",
+    "subscribe": "Subscribe"
+  },
+  "homepage": {
+    "title": "Latest World News",
+    "description": "Stay informed with breaking news and in-depth coverage from around the globe",
+    "featuredNews": "Featured News",
+    "breakingNews": "Breaking News",
+    "latestNews": "Latest News",
+    "trending": "Trending Now",
+    "categories": {
+      "politics": "Politics",
+      "business": "Business",
+      "technology": "Technology",
+      "sports": "Sports",
+      "entertainment": "Entertainment",
+      "health": "Health",
+      "science": "Science",
+      "world": "World News"
+    }
+  },
+  "article": {
+    "publishedOn": "Published on {date}",
+    "updatedOn": "Updated on {date}",
+    "readTime": "{minutes} min read",
+    "author": "By {author}",
+    "tags": "Tags",
+    "relatedArticles": "Related Articles",
+    "shareArticle": "Share This Article",
+    "shareOn": "Share on {platform}",
+    "copyLink": "Copy Link",
+    "linkCopied": "Link copied to clipboard!",
+    "comments": "Comments",
+    "noComments": "No comments yet",
+    "writeComment": "Write a comment...",
+    "postComment": "Post Comment"
+  },
+  "search": {
+    "title": "Search Results",
+    "placeholder": "What are you looking for?",
+    "resultsFor": "Results for \"{query}\"",
+    "noResults": "No results found for \"{query}\"",
+    "noResultsDescription": "Try adjusting your search terms or browse our categories",
+    "suggestions": "Search Suggestions",
+    "recentSearches": "Recent Searches",
+    "clearHistory": "Clear Search History",
+    "searchHistory": "Search History",
+    "filters": "Filters",
+    "sortBy": "Sort By",
+    "relevance": "Relevance",
+    "date": "Date",
+    "popularity": "Popularity"
+  },
+  "categories": {
+    "title": "News Categories",
+    "description": "Browse news by category to find what interests you most",
+    "allCategories": "All Categories",
+    "articlesInCategory": "{count} articles in {category}",
+    "noArticles": "No articles in this category yet"
+  },
+  "about": {
+    "title": "About Global News Hub",
+    "description": "Your trusted source for comprehensive world news coverage",
+    "mission": "Our Mission",
+    "missionText": "To provide accurate, timely, and unbiased news coverage from around the world.",
+    "team": "Our Team",
+    "contact": "Get in Touch",
+    "history": "Our History",
+    "values": "Our Values"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "description": "Get in touch with our editorial team",
+    "form": {
+      "name": "Full Name",
+      "namePlaceholder": "Enter your full name",
+      "email": "Email Address",
+      "emailPlaceholder": "Enter your email address",
+      "subject": "Subject",
+      "subjectPlaceholder": "What is this about?",
+      "message": "Message",
+      "messagePlaceholder": "Write your message here...",
+      "send": "Send Message",
+      "sending": "Sending...",
+      "success": "Thank you! Your message has been sent.",
+      "error": "Sorry, there was an error sending your message."
+    },
+    "info": {
+      "address": "Address",
+      "phone": "Phone",
+      "email": "Email",
+      "hours": "Business Hours"
+    }
+  },
+  "errors": {
+    "404": {
+      "title": "Page Not Found",
+      "description": "The page you're looking for doesn't exist or has been moved.",
+      "backHome": "Go Back Home"
+    },
+    "500": {
+      "title": "Server Error",
+      "description": "Something went wrong on our end. Please try again later.",
+      "refresh": "Refresh Page"
+    },
+    "offline": {
+      "title": "You're Offline",
+      "description": "Please check your internet connection and try again.",
+      "retry": "Retry Connection"
+    }
+  },
+  "accessibility": {
+    "skipToMain": "Skip to main content",
+    "openMenu": "Open navigation menu",
+    "closeMenu": "Close navigation menu",
+    "searchExpanded": "Search menu is expanded",
+    "searchCollapsed": "Search menu is collapsed",
+    "languageSwitcher": "Language switcher",
+    "shareMenu": "Share menu",
+    "socialLinks": "Social media links"
+  },
+  "time": {
+    "justNow": "Just now",
+    "minuteAgo": "{count} minute ago",
+    "minutesAgo": "{count} minutes ago",
+    "hourAgo": "{count} hour ago",
+    "hoursAgo": "{count} hours ago",
+    "dayAgo": "{count} day ago",
+    "daysAgo": "{count} days ago",
+    "weekAgo": "{count} week ago",
+    "weeksAgo": "{count} weeks ago",
+    "monthAgo": "{count} month ago",
+    "monthsAgo": "{count} months ago",
+    "yearAgo": "{count} year ago",
+    "yearsAgo": "{count} years ago"
+  },
+  "seo": {
+    "defaultTitle": "Global News Hub - World News Coverage",
+    "defaultDescription": "Stay informed with breaking news, in-depth analysis, and comprehensive coverage from around the globe. Your trusted source for world news.",
+    "keywords": "news, world news, breaking news, current events, politics, business, technology, sports"
+  }
+}
