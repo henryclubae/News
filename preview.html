@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Website - Component Preview</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .line-clamp-3 {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .animate-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .5; }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-900 dark:text-white">News Website</h1>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">Component Preview</p>
+                </div>
+                
+                <!-- Theme Toggle -->
+                <div class="flex items-center space-x-4">
+                    <button onclick="toggleTheme()" aria-label="Toggle theme" title="Toggle theme" class="inline-flex items-center justify-center w-9 h-9 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200">
+                        <svg id="sun-icon" class="w-4 h-4 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                        </svg>
+                        <svg id="moon-icon" class="w-4 h-4 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Welcome Section -->
+        <section class="mb-12 text-center">
+            <div class="bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-2xl p-8 shadow-xl">
+                <h2 class="text-4xl font-bold mb-4">🚀 News Website Components</h2>
+                <p class="text-xl opacity-90 mb-6">Fully implemented with Next.js, TypeScript, Tailwind CSS</p>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                    <div class="bg-white/20 rounded-lg p-3">
+                        <div class="font-semibold">NewsCard</div>
+                        <div class="opacity-80">4 Variants</div>
+                    </div>
+                    <div class="bg-white/20 rounded-lg p-3">
+                        <div class="font-semibold">NewsGrid</div>
+                        <div class="opacity-80">Infinite Scroll</div>
+                    </div>
+                    <div class="bg-white/20 rounded-lg p-3">
+                        <div class="font-semibold">SearchBar</div>
+                        <div class="opacity-80">Smart Search</div>
+                    </div>
+                    <div class="bg-white/20 rounded-lg p-3">
+                        <div class="font-semibold">Theme System</div>
+                        <div class="opacity-80">Dark/Light</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SearchBar Demo -->
+        <section class="mb-12">
+            <div class="flex items-center mb-6">
+                <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-3">1</div>
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white">SearchBar Component</h2>
+            </div>
+            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-6">
+                <!-- Search Input -->
+                <div class="relative max-w-2xl mx-auto mb-6">
+                    <select aria-label="Category filter" title="Category filter" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-sm bg-transparent border-none outline-none text-gray-600 dark:text-gray-400">
+                        <option>All</option>
+                        <option>Technology</option>
+                        <option>Sports</option>
+                        <option>Politics</option>
+                    </select>
+                    <input type="text" placeholder="Search for news, articles, or topics..." 
+                           class="w-full h-12 pl-20 pr-12 text-gray-900 dark:text-white bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-500 dark:placeholder-gray-400 transition-all duration-200">
+                    <svg class="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                </div>
+                <div class="text-center text-gray-600 dark:text-gray-400">
+                    ✅ Real-time suggestions • ✅ Search history • ✅ Keyboard navigation • ✅ Category filters
+                </div>
+            </div>
+        </section>
+
+        <!-- NewsCard Demo -->
+        <section class="mb-12">
+            <div class="flex items-center mb-6">
+                <div class="bg-green-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-3">2</div>
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white">NewsCard Components</h2>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Featured Card -->
+                <div class="md:col-span-2 lg:col-span-2">
+                    <article class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-all duration-300 group">
+                        <div class="relative h-64">
+                            <div class="w-full h-full bg-gradient-to-r from-blue-400 to-purple-500 flex items-center justify-center text-white text-lg font-semibold">
+                                Featured Article Image
+                            </div>
+                            <span class="absolute top-3 left-3 bg-blue-500 text-white px-2 py-1 rounded-full text-xs font-semibold">Featured</span>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-2">
+                                <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded-full text-xs font-medium mr-2">Technology</span>
+                                <span>John Doe • 2 hours ago • 5 min read</span>
+                            </div>
+                            <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-3 line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                                Revolutionary AI Breakthrough Changes Everything We Know About Machine Learning
+                            </h2>
+                            <p class="text-gray-600 dark:text-gray-300 line-clamp-3 mb-4">
+                                Scientists have made a groundbreaking discovery in artificial intelligence that could reshape the future of technology. This new approach to machine learning promises unprecedented capabilities...
+                            </p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-3">
+                                    <button class="flex items-center space-x-1 text-gray-500 hover:text-red-500 transition-colors">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                                        </svg>
+                                        <span class="text-sm">24</span>
+                                    </button>
+                                    <button class="flex items-center space-x-1 text-gray-500 hover:text-blue-500 transition-colors">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"></path>
+                                        </svg>
+                                        <span class="text-sm">Share</span>
+                                    </button>
+                                </div>
+                                <span class="text-sm text-gray-500">1.2k views</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Compact Cards -->
+                <div class="space-y-4">
+                    <article class="bg-white dark:bg-gray-800 rounded-lg shadow border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-md transition-all">
+                        <div class="p-4">
+                            <div class="flex items-center text-xs text-gray-500 dark:text-gray-400 mb-2">
+                                <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded-full mr-2">Sports</span>
+                                <span>1h ago</span>
+                            </div>
+                            <h3 class="font-semibold text-gray-900 dark:text-white line-clamp-2 mb-2">
+                                Championship Finals Set Record Viewership
+                            </h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-300 line-clamp-2">
+                                The latest championship drew millions of viewers worldwide...
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="bg-white dark:bg-gray-800 rounded-lg shadow border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-md transition-all">
+                        <div class="p-4">
+                            <div class="flex items-center text-xs text-gray-500 dark:text-gray-400 mb-2">
+                                <span class="bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 px-2 py-1 rounded-full mr-2">Business</span>
+                                <span>3h ago</span>
+                            </div>
+                            <h3 class="font-semibold text-gray-900 dark:text-white line-clamp-2 mb-2">
+                                Market Reaches New Heights
+                            </h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-300 line-clamp-2">
+                                Stock markets soar to unprecedented levels as investors...
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="bg-white dark:bg-gray-800 rounded-lg shadow border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-md transition-all">
+                        <div class="p-4">
+                            <div class="flex items-center text-xs text-gray-500 dark:text-gray-400 mb-2">
+                                <span class="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 px-2 py-1 rounded-full mr-2">Health</span>
+                                <span>5h ago</span>
+                            </div>
+                            <h3 class="font-semibold text-gray-900 dark:text-white line-clamp-2 mb-2">
+                                New Health Guidelines Released
+                            </h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-300 line-clamp-2">
+                                Health officials announce updated recommendations...
+                            </p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Implementation Status -->
+        <section class="mb-12">
+            <div class="flex items-center mb-6">
+                <div class="bg-indigo-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-3">✓</div>
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Implementation Status</h2>
+            </div>
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Completed Features -->
+                <div class="bg-green-50 dark:bg-green-900/20 rounded-2xl p-6 border border-green-200 dark:border-green-800">
+                    <h3 class="text-xl font-bold text-green-800 dark:text-green-200 mb-4">✅ Completed Features</h3>
+                    <ul class="space-y-2 text-green-700 dark:text-green-300">
+                        <li>• Complete NewsCard component with 4 variants</li>
+                        <li>• Advanced NewsGrid with infinite scroll</li>
+                        <li>• Smart SearchBar with real-time suggestions</li>
+                        <li>• Theme system with dark/light modes</li>
+                        <li>• Footer components (desktop & mobile)</li>
+                        <li>• TypeScript interfaces and type safety</li>
+                        <li>• Accessibility compliance (WCAG)</li>
+                        <li>• Responsive design (mobile-first)</li>
+                        <li>• Framer Motion animations</li>
+                        <li>• Comprehensive documentation</li>
+                    </ul>
+                </div>
+
+                <!-- Technical Stack -->
+                <div class="bg-blue-50 dark:bg-blue-900/20 rounded-2xl p-6 border border-blue-200 dark:border-blue-800">
+                    <h3 class="text-xl font-bold text-blue-800 dark:text-blue-200 mb-4">🛠️ Technical Stack</h3>
+                    <ul class="space-y-2 text-blue-700 dark:text-blue-300">
+                        <li>• <strong>Next.js 14</strong> - App Router & Server Components</li>
+                        <li>• <strong>TypeScript</strong> - Full type safety</li>
+                        <li>• <strong>Tailwind CSS</strong> - Utility-first styling</li>
+                        <li>• <strong>Framer Motion</strong> - Smooth animations</li>
+                        <li>• <strong>Heroicons</strong> - Beautiful icons</li>
+                        <li>• <strong>React Hooks</strong> - Modern patterns</li>
+                        <li>• <strong>Local Storage</strong> - Persistent data</li>
+                        <li>• <strong>ESLint & Prettier</strong> - Code quality</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 dark:bg-gray-950 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="md:col-span-2">
+                    <h3 class="text-2xl font-bold mb-4">News Website</h3>
+                    <p class="text-gray-300 mb-4">Your trusted source for breaking news, in-depth analysis, and comprehensive coverage of global events.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" aria-label="Visit Twitter" title="Twitter" class="text-gray-400 hover:text-white transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
+                        </a>
+                        <a href="#" aria-label="Visit Facebook" title="Facebook" class="text-gray-400 hover:text-white transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/></svg>
+                        </a>
+                        <a href="#" aria-label="Visit Reddit" title="Reddit" class="text-gray-400 hover:text-white transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.219-.359-1.219c0-1.14.219-1.994.897-1.994.424 0 .629.219.629.629 0 .419-.219 1.05-.359 1.634-.219.897.449 1.644 1.219 1.644 1.474 0 2.543-1.559 2.543-3.853 0-1.994-1.434-3.412-3.853-3.412-2.792 0-4.481 2.057-4.481 4.321 0 .449.154.927.449 1.354a.27.27 0 01.063.263c-.071.284-.154.927-.154 1.056-.036.154-.144.184-.334.11-1.239-.449-1.83-1.874-1.83-3.412 0-2.543 1.875-5.562 5.562-5.562 2.958 0 5.096 2.057 5.096 4.715 0 3.412-2.057 5.851-5.096 5.851-1.008 0-1.955-.524-2.263-1.14l-.628 2.378c-.219.837-.628 1.674-.927 2.263A12.018 12.018 0 0024.002 11.987C24.002 5.367 18.635.001 12.017.001z"/></svg>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Categories</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="#" class="hover:text-white transition-colors">Technology</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Sports</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Politics</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Business</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Health</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">About</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="#" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Contact</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 mt-8 text-center text-gray-400">
+                <p>&copy; 2025 News Website. All rights reserved. Built with Next.js, TypeScript & Tailwind CSS.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Theme toggle functionality
+        function toggleTheme() {
+            const html = document.documentElement;
+            const isDark = html.classList.contains('dark');
+            
+            if (isDark) {
+                html.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        }
+
+        // Add some interactive hover effects
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('article');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-2px)';
+                });
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

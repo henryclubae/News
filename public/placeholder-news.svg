@@ -1,0 +1,13 @@
+﻿<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="300" fill="#f3f4f6"/>
+  <rect x="20" y="20" width="360" height="260" fill="white" stroke="#d1d5db" stroke-width="2" rx="8"/>
+  <circle cx="200" cy="120" r="30" fill="#e5e7eb"/>
+  <rect x="170" y="105" width="60" height="4" fill="#9ca3af" rx="2"/>
+  <rect x="170" y="115" width="60" height="4" fill="#9ca3af" rx="2"/>
+  <rect x="170" y="125" width="60" height="4" fill="#9ca3af" rx="2"/>
+  <rect x="175" y="135" width="50" height="4" fill="#9ca3af" rx="2"/>
+  <rect x="40" y="180" width="320" height="8" fill="#e5e7eb" rx="4"/>
+  <rect x="40" y="200" width="280" height="8" fill="#e5e7eb" rx="4"/>
+  <rect x="40" y="220" width="240" height="8" fill="#e5e7eb" rx="4"/>
+  <text x="200" y="260" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#6b7280">News Placeholder</text>
+</svg>

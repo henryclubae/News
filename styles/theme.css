@@ -1,0 +1,161 @@
+/* ============================================================================ */
+/* THEME VARIABLES AND TRANSITIONS */
+/* ============================================================================ */
+
+:root {
+  /* Default light theme variables will be set by ThemeProvider */
+  --transition-theme: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================================================ */
+/* THEME TRANSITIONS */
+/* ============================================================================ */
+
+html {
+  transition: var(--transition-theme);
+}
+
+html.theme-transition-disabled,
+html.theme-transition-disabled * {
+  transition: none !important;
+}
+
+/* ============================================================================ */
+/* COMPONENT TRANSITIONS */
+/* ============================================================================ */
+
+*,
+*::before,
+*::after {
+  transition: 
+    background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    fill 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    stroke 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================================================ */
+/* UTILITY CLASSES FOR THEME COLORS */
+/* ============================================================================ */
+
+.text-theme-primary {
+  color: hsl(var(--color-text-primary));
+}
+
+.text-theme-secondary {
+  color: hsl(var(--color-text-secondary));
+}
+
+.text-theme-muted {
+  color: hsl(var(--color-text-muted));
+}
+
+.bg-theme-background {
+  background-color: hsl(var(--color-background));
+}
+
+.bg-theme-surface {
+  background-color: hsl(var(--color-surface));
+}
+
+.bg-theme-accent {
+  background-color: hsl(var(--color-accent));
+}
+
+.border-theme {
+  border-color: hsl(var(--color-border));
+}
+
+.border-theme-hover:hover {
+  border-color: hsl(var(--color-border-hover));
+}
+
+/* ============================================================================ */
+/* THEME TOGGLE ANIMATIONS */
+/* ============================================================================ */
+
+@keyframes theme-switch {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.theme-switching {
+  animation: theme-switch 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================================================ */
+/* DARK MODE SPECIFIC STYLES */
+/* ============================================================================ */
+
+[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+}
+
+/* ============================================================================ */
+/* REDUCED MOTION SUPPORT */
+/* ============================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  html {
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================================================ */
+/* HIGH CONTRAST SUPPORT */
+/* ============================================================================ */
+
+@media (prefers-contrast: high) {
+  :root {
+    --color-border: 0 0% 0%;
+    --color-text-primary: 0 0% 0%;
+    --color-background: 0 0% 100%;
+  }
+  
+  [data-theme="dark"] {
+    --color-border: 0 0% 100%;
+    --color-text-primary: 0 0% 100%;
+    --color-background: 0 0% 0%;
+  }
+}
+
+/* ============================================================================ */
+/* PRINT STYLES */
+/* ============================================================================ */
+
+@media print {
+  * {
+    background: white !important;
+    color: black !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+}

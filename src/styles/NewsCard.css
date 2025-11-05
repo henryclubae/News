@@ -1,0 +1,186 @@
+/* NewsCard Component Utilities */
+@layer utilities {
+  /* Line clamp utilities for text truncation */
+  .line-clamp-1 {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Smooth hover transitions */
+  .news-card-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Image overlay gradients */
+  .news-card-gradient {
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.6) 0%,
+      rgba(0, 0, 0, 0.3) 50%,
+      rgba(0, 0, 0, 0) 100%
+    );
+  }
+
+  /* Loading placeholder shimmer */
+  .news-card-shimmer {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+
+  /* Focus styles for accessibility */
+  .news-card-focus {
+    outline: none;
+  }
+  
+  .news-card-focus:focus {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+  }
+  
+  .dark .news-card-focus:focus {
+    outline-color: #60a5fa;
+    outline-offset: 2px;
+  }
+
+  /* Backdrop blur utilities */
+  .backdrop-blur-xs {
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .news-card-hover,
+    .motion-reduce-safe {
+      transition: none !important;
+      animation: none !important;
+    }
+  }
+
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    .news-card-border {
+      border-width: 2px;
+    }
+  }
+}
+
+/* Component-specific styles */
+.news-card {
+  /* Ensure consistent aspect ratios */
+  .news-card-image {
+    aspect-ratio: 16 / 9;
+  }
+
+  .news-card-image-compact {
+    aspect-ratio: 4 / 3;
+  }
+
+  .news-card-image-horizontal {
+    aspect-ratio: 3 / 2;
+  }
+
+  /* Category badge styles */
+  .category-badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+  }
+
+  /* Share button animations */
+  .share-button {
+    transform: translateY(0);
+    transition: all 0.2s ease-in-out;
+  }
+
+  .share-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Social media brand colors */
+  .social-twitter {
+    background-color: #1da1f2;
+  }
+
+  .social-facebook {
+    background-color: #1877f2;
+  }
+
+  .social-linkedin {
+    background-color: #0077b5;
+  }
+
+  .social-copy {
+    background-color: #6b7280;
+  }
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  .news-card {
+    /* Enhance shadows for dark mode */
+    .shadow-lg {
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3),
+                  0 4px 6px -2px rgba(0, 0, 0, 0.2);
+    }
+
+    .shadow-2xl {
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+    }
+  }
+}
+
+/* Print styles */
+@media print {
+  .news-card {
+    /* Hide interactive elements when printing */
+    .share-button,
+    .bookmark-button,
+    .like-button {
+      display: none;
+    }
+
+    /* Ensure good contrast for printing */
+    background: white !important;
+    color: black !important;
+    border: 1px solid #ccc !important;
+  }
+}
