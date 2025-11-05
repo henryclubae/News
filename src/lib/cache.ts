@@ -155,7 +155,7 @@ export abstract class BaseCacheAdapter {
       (this.stats.avgResponseTime + responseTime) / 2;
   }
 
-  protected generateKey(prefix: string, identifier: string, version?: string): string {
+  public generateKey(prefix: string, identifier: string, version?: string): string {
     const versionSuffix = version ? `:v${version}` : '';
     return `${prefix}:${identifier}${versionSuffix}`;
   }
@@ -1013,7 +1013,7 @@ export class BrowserCacheAdapter extends BaseCacheAdapter {
 
 export class CacheManager {
   private serverCache: RedisCacheAdapter;
-  private clientCache: BrowserCacheAdapter;
+  private clientCache: BrowserCacheAdapter | null = null;
   private isServer: boolean;
 
   constructor(redisConfig?: any, browserConfig?: any) {
@@ -1026,7 +1026,13 @@ export class CacheManager {
   }
 
   private getAdapter(): BaseCacheAdapter {
-    return this.isServer ? this.serverCache : this.clientCache;
+    if (this.isServer) {
+      return this.serverCache;
+    }
+    if (!this.clientCache) {
+      throw new Error('Client cache not initialized');
+    }
+    return this.clientCache;
   }
 
   async get<T>(key: string): Promise<T | null> {

@@ -108,7 +108,22 @@ const nextConfig = {
   output: 'standalone',
   trailingSlash: false,
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
-  webpack: (config, { dev, isServer, webpack }) => {
+  
+  // Turbopack configuration for Next.js 16
+  turbopack: {
+    rules: {
+      '*.svg': {
+        loaders: ['@svgr/webpack'],
+        as: '*.js',
+      },
+    },
+    resolveAlias: {
+      '@': './src',
+    },
+  },
+  
+  // Webpack configuration (fallback)
+  webpack: (config, { dev, isServer }) => {
     config.module.rules.push({
       test: /\.svg$/i,
       issuer: /\.[jt]sx?$/,

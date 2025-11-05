@@ -385,8 +385,12 @@ export class ImageCacheManager {
       const ctx = canvas.getContext('2d');
       if (!ctx) return null;
 
+      if (!cachedData?.blob) {
+        return null;
+      }
+
       const img = new Image();
-      img.src = URL.createObjectURL(cachedData!.blob);
+      img.src = URL.createObjectURL(cachedData.blob);
       
       await new Promise((resolve) => {
         img.onload = resolve;

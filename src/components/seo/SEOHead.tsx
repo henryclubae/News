@@ -168,9 +168,9 @@ const generateNewsArticleSchema = (
     '@context': 'https://schema.org',
     '@type': 'NewsArticle',
     headline: article.title,
-    description: article.description || article.summary,
-    datePublished: article.publishedAt,
-    dateModified: article.updatedAt || article.publishedAt,
+    description: article.summary,
+    datePublished: article.publishDate.toISOString(),
+    dateModified: (article.updateDate || article.publishDate).toISOString(),
     url: `${siteUrl}/article/${article.slug}`,
     mainEntityOfPage: {
       '@type': 'WebPage',
@@ -202,7 +202,7 @@ const generateNewsArticleSchema = (
 
   // Add article section/category
   if (article.category) {
-    schema.articleSection = article.category;
+    schema.articleSection = article.category.name;
   }
 
   // Add keywords/tags
@@ -245,7 +245,7 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
   );
   
   const pageDescription = truncateDescription(
-    description || article?.description || article?.summary || DEFAULT_CONFIG.defaultDescription
+    description || article?.summary || DEFAULT_CONFIG.defaultDescription
   );
   
   const pageKeywords = keywords || generateKeywords(article, category);
@@ -259,8 +259,8 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
   
   const pageCanonical = canonical || (article ? `${siteUrl}/article/${article.slug}` : undefined);
   
-  const pagePublishedDate = publishedDate || article?.publishedAt;
-  const pageModifiedDate = modifiedDate || article?.updatedAt || pagePublishedDate;
+  const pagePublishedDate = publishedDate || article?.publishDate;
+  const pageModifiedDate = modifiedDate || article?.updateDate || pagePublishedDate;
   
   // Generate structured data
   const structuredData = customSchema || (article ? generateNewsArticleSchema(
@@ -314,10 +314,10 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
       {type === 'article' && (
         <>
           {pagePublishedDate && (
-            <meta property="article:published_time" content={pagePublishedDate} />
+            <meta property="article:published_time" content={typeof pagePublishedDate === 'string' ? pagePublishedDate : pagePublishedDate.toISOString()} />
           )}
           {pageModifiedDate && (
-            <meta property="article:modified_time" content={pageModifiedDate} />
+            <meta property="article:modified_time" content={typeof pageModifiedDate === 'string' ? pageModifiedDate : pageModifiedDate.toISOString()} />
           )}
           {author && <meta property="article:author" content={author.name} />}
           {category && <meta property="article:section" content={category.name} />}
@@ -334,7 +334,7 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
       <meta name="twitter:image" content={`${siteUrl}${pageImage.url}`} />
       <meta name="twitter:image:alt" content={pageImage.alt} />
       {twitterHandle && <meta name="twitter:site" content={twitterHandle} />}
-      {author?.twitter && <meta name="twitter:creator" content={author.twitter} />}
+      {author?.socialLinks?.twitter && <meta name="twitter:creator" content={author.socialLinks.twitter} />}
       
       {/* Additional Twitter Tags for Large Image Card */}
       {twitterCardType === 'summary_large_image' && (
@@ -347,10 +347,10 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
       
       {/* Publication Dates */}
       {pagePublishedDate && (
-        <meta name="datePublished" content={pagePublishedDate} />
+        <meta name="datePublished" content={typeof pagePublishedDate === 'string' ? pagePublishedDate : pagePublishedDate.toISOString()} />
       )}
       {pageModifiedDate && (
-        <meta name="dateModified" content={pageModifiedDate} />
+        <meta name="dateModified" content={typeof pageModifiedDate === 'string' ? pageModifiedDate : pageModifiedDate.toISOString()} />
       )}
       
       {/* Search Engine Tags */}
@@ -408,15 +408,15 @@ export const ArticleSEOHead: React.FC<{
 }> = ({ article, author, category, siteUrl, siteName }) => (
   <SEOHead
     title={article.title}
-    description={article.description || article.summary}
+    description={article.summary}
     article={article}
     author={author}
     category={category}
     type="article"
     siteUrl={siteUrl}
     siteName={siteName}
-    publishedDate={article.publishedAt}
-    modifiedDate={article.updatedAt}
+    publishedDate={article.publishDate.toISOString()}
+    modifiedDate={article.updateDate?.toISOString()}
     image={article.imageUrl ? {
       url: article.imageUrl,
       alt: article.title,

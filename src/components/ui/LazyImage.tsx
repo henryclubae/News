@@ -284,8 +284,8 @@ export const LazyImage: React.FC<LazyImageProps> = ({
   // Refs
   const imageRef = useRef<HTMLDivElement>(null);
   const observerRef = useRef<IntersectionObserver | null>(null);
-  const retryTimeoutRef = useRef<NodeJS.Timeout>();
-  const loadStartTimeRef = useRef<number>();
+  const retryTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const loadStartTimeRef = useRef<number | null>(null);
   
   // WebP source generation
   const webpSrc = enableWebP ? generateWebPSrc(currentSrc, quality) : currentSrc;
@@ -345,7 +345,10 @@ export const LazyImage: React.FC<LazyImageProps> = ({
       isLoading: false,
       hasError: false,
       loadTime,
-      naturalDimensions: result,
+      naturalDimensions: {
+        width: result.naturalWidth,
+        height: result.naturalHeight,
+      },
     }));
     
     if (onLoadComplete) {
@@ -475,7 +478,7 @@ export const LazyImage: React.FC<LazyImageProps> = ({
           sizes={sizes}
           priority={priority}
           loading={loading}
-          placeholder={placeholder}
+          placeholder={placeholder === 'skeleton' ? 'empty' : placeholder}
           blurDataURL={blurDataURL || generatedBlurDataURL}
           quality={quality}
           className={`${zoomOnHover ? 'group-hover:scale-105' : ''} transition-all duration-300`}
