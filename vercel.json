@@ -46,7 +46,8 @@
   ],
   "env": {
     "NODE_ENV": "production",
-    "NEXT_PUBLIC_APP_NAME": "News Website"
+    "NEXT_PUBLIC_APP_NAME": "Sezarr Overseas News",
+    "NEXT_PUBLIC_APP_URL": "https://sezarroverseas.com"
   },
 
   "regions": ["iad1"],

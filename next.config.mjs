@@ -102,7 +102,7 @@ const nextConfig = {
         has: [
           {
             type: 'host',
-            value: 'old-domain.com',
+            value: 'sezarroverseas.com',
           },
         ],
         destination: '/en/news/:slug*',
