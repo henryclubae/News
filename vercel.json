@@ -1,6 +1,19 @@
-{
+﻿{
   "version": 2,
   "framework": "nextjs",
+  "env": {
+    "NODE_ENV": "production",
+    "NEXT_PUBLIC_APP_NAME": "News Website",
+    "NEXT_PUBLIC_GA4_MEASUREMENT_ID": "G-528699TFSJ",
+    "CUSTOM_KEY": "news-website"
+  },
+  "build": {
+    "env": {
+      "NEXT_PUBLIC_GA4_MEASUREMENT_ID": "G-528699TFSJ",
+      "NEXT_PUBLIC_APP_NAME": "News Website",
+      "CUSTOM_KEY": "news-website"
+    }
+  },
   "rewrites": [
     {
       "source": "/sw.js",
@@ -42,14 +55,41 @@
           "value": "public, max-age=86400, s-maxage=31536000"
         }
       ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "origin-when-cross-origin"
+        }
+      ]
     }
   ],
-  "env": {
-    "NODE_ENV": "production",
-    "NEXT_PUBLIC_APP_NAME": "Sezarr Overseas News",
-    "NEXT_PUBLIC_APP_URL": "https://sezarroverseas.com"
-  },
-
+  "redirects": [
+    {
+      "source": "/blog/:path*",
+      "destination": "/news/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/category/:path*",
+      "destination": "/categories/:path*",
+      "permanent": true
+    }
+  ],
   "regions": ["iad1"],
   "github": {
     "autoDeployments": true,
