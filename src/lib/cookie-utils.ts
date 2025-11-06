@@ -175,7 +175,9 @@ export function loadConsentBasedScripts(preferences: CookiePreferences): void {
   const analytics = getAnalytics();
   if (analytics) {
     // Set user consent preferences
-    analytics.setUserId(preferences.analytics ? `user_${Date.now()}` : undefined);
+    if (preferences.analytics) {
+      analytics.setUserId(`user_${Date.now()}`);
+    }
     
     // Track consent choices for analytics
     analytics.trackCustomEvent({
@@ -219,7 +221,7 @@ function loadGoogleAnalytics(): void {
   const measurementId = process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID || 'G-528699TFSJ';
   
   // Check if already loaded
-  if (window.gtag) return;
+  if (typeof window.gtag !== 'undefined') return;
   
   const script = document.createElement('script');
   script.async = true;
