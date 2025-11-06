@@ -1,0 +1,96 @@
+/* Analytics Dashboard Styles */
+
+.error-rate-bar {
+  height: 8px;
+  border-radius: 9999px;
+  transition: all 0.3s ease;
+}
+
+.error-rate-bar[data-width="0"] { width: 0%; }
+.error-rate-bar[data-width="1"] { width: 1%; }
+.error-rate-bar[data-width="2"] { width: 2%; }
+.error-rate-bar[data-width="3"] { width: 3%; }
+.error-rate-bar[data-width="4"] { width: 4%; }
+.error-rate-bar[data-width="5"] { width: 5%; }
+.error-rate-bar[data-width="6"] { width: 6%; }
+.error-rate-bar[data-width="7"] { width: 7%; }
+.error-rate-bar[data-width="8"] { width: 8%; }
+.error-rate-bar[data-width="9"] { width: 9%; }
+.error-rate-bar[data-width="10"] { width: 10%; }
+.error-rate-bar[data-width="15"] { width: 15%; }
+.error-rate-bar[data-width="20"] { width: 20%; }
+.error-rate-bar[data-width="25"] { width: 25%; }
+.error-rate-bar[data-width="30"] { width: 30%; }
+.error-rate-bar[data-width="35"] { width: 35%; }
+.error-rate-bar[data-width="40"] { width: 40%; }
+.error-rate-bar[data-width="45"] { width: 45%; }
+.error-rate-bar[data-width="50"] { width: 50%; }
+.error-rate-bar[data-width="55"] { width: 55%; }
+.error-rate-bar[data-width="60"] { width: 60%; }
+.error-rate-bar[data-width="65"] { width: 65%; }
+.error-rate-bar[data-width="70"] { width: 70%; }
+.error-rate-bar[data-width="75"] { width: 75%; }
+.error-rate-bar[data-width="80"] { width: 80%; }
+.error-rate-bar[data-width="85"] { width: 85%; }
+.error-rate-bar[data-width="90"] { width: 90%; }
+.error-rate-bar[data-width="95"] { width: 95%; }
+.error-rate-bar[data-width="100"] { width: 100%; }
+
+.dashboard-loading {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.dashboard-card-hover {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.dashboard-card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.analytics-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.analytics-grid-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.analytics-grid-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.analytics-grid-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.analytics-grid-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+@media (max-width: 768px) {
+  .analytics-grid {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .analytics-grid-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  
+  .analytics-grid-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
